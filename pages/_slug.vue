@@ -1,26 +1,27 @@
 <template>
   <div class="card">
-    <img :src="product.imageUrl" alt="Denim Jeans" style="width:100%" />
+    <img :src="product.imageUrl" alt="Product image" style="width:100%" />
     <h1>{{ product.title }}</h1>
     <p class="price">${{ product.price }}</p>
-    <p>{{ product.description }}</p>
-    <button>Add to Cart</button>
+    <p>{{ product.blurb }}..</p>
+    <p><button>Add to Cart</button></p>
   </div>
 </template>
 
 <script>
 import { groq } from "@nuxtjs/sanity";
-
 export default {
   async asyncData({ params, $sanity }) {
-    const query = groq`
-    *[_type == "product" && slug.current == "${params.slug}"][0]{
-      title,
-      "price": defaultProductVariant.price,
-      "description": body.en[0].children[0].text,
-      "imageUrl": defaultProductVariant.images[0].asset->url
-    }`;
+    const query = groq`*[_type == "product" && 
+        slug.current == "${params.slug}"
+        ][0]{
+        title,
+        "price": defaultProductVariant.price,
+        "imageUrl": defaultProductVariant.images[0].asset->url,
+        "blurb": blurb.en
+        }`;
     const product = await $sanity.fetch(query);
+
     return { product };
   }
 };
@@ -29,7 +30,7 @@ export default {
 <style>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 500px;
+  max-width: 300px;
   margin: auto;
   text-align: center;
   font-family: arial;
@@ -38,7 +39,6 @@ export default {
 .price {
   color: grey;
   font-size: 22px;
-  margin: 1rem;
 }
 
 .card button {
@@ -51,7 +51,6 @@ export default {
   cursor: pointer;
   width: 100%;
   font-size: 18px;
-  margin-top: 3rem;
 }
 
 .card button:hover {
