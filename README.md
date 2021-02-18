@@ -17,4 +17,8 @@ $ yarn start
 $ yarn generate
 ```
 
+## backend
+
+The sanity project supplying the data for this app is hosted here https://github.com/kenny-io/sanity-mission
+
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
