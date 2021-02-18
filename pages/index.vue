@@ -4,7 +4,7 @@
     <div class="products">
       <div v-for="product in products" :key="product._id" class="products">
         <h2>
-          <NuxtLink :to="`/${product.slug.current}`">
+          <NuxtLink :to="product.slug.current">
             {{ product.title }}
           </NuxtLink>
         </h2>
