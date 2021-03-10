@@ -13,5 +13,8 @@
     "@sanity/client": "^2.2.6",
     "core-js": "^3.8.3",
     "nuxt": "^2.14.12"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.13.10"
   }
 }
